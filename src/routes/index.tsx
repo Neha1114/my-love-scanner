@@ -1,3 +1,4 @@
+import { LovePassword } from "@/components/LovePassword";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -13,6 +14,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [unlocked, setUnlocked] = useState(false);
   const [scannerOpen, setScannerOpen] = useState(false);
   const [revealed, setRevealed] = useState(false);
 
@@ -23,6 +25,15 @@ function Index() {
       setRevealed(true);
     }, 800);
   };
+
+  // PASSWORD SCREEN
+  if (!unlocked) {
+    return (
+      <LovePassword
+        onUnlock={() => setUnlocked(true)}
+      />
+    );
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
@@ -73,6 +84,10 @@ function Index() {
             <ScanFace className="h-5 w-5" />
             Begin Love Scan
           </motion.button>
+
+          <div className="mt-16 text-sm text-white/30">
+            Made with ❤️ by Neha
+          </div>
 
         </section>
       )}
